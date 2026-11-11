@@ -50,3 +50,6 @@ scripts/benchmark/21_*.py
 
 # Private development/test overlap audit - contains test wording
 reports/benchmark/dev_test_overlap_audit.json
+
+# Private audit script requiring the locked-test dataset
+scripts/benchmark/12_dev_test_overlap_audit.py
