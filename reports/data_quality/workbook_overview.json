@@ -1,0 +1,137 @@
+{
+    "source_file": "online_retail_II.xlsx",
+    "inspection_timestamp_utc": "2026-11-09T19:42:54.838157+00:00",
+    "total_worksheets": 2,
+    "worksheet_names": [
+        "Year 2009-2010",
+        "Year 2010-2011"
+    ],
+    "worksheets": {
+        "Year 2009-2010": {
+            "row_count": 525461,
+            "column_count": 8,
+            "columns": [
+                "Invoice",
+                "StockCode",
+                "Description",
+                "Quantity",
+                "InvoiceDate",
+                "Price",
+                "Customer ID",
+                "Country"
+            ],
+            "data_types": {
+                "Invoice": "object",
+                "StockCode": "object",
+                "Description": "object",
+                "Quantity": "int64",
+                "InvoiceDate": "datetime64[us]",
+                "Price": "float64",
+                "Customer ID": "float64",
+                "Country": "str"
+            },
+            "missing_values": {
+                "Invoice": {
+                    "count": 0,
+                    "percentage": 0.0
+                },
+                "StockCode": {
+                    "count": 0,
+                    "percentage": 0.0
+                },
+                "Description": {
+                    "count": 2928,
+                    "percentage": 0.56
+                },
+                "Quantity": {
+                    "count": 0,
+                    "percentage": 0.0
+                },
+                "InvoiceDate": {
+                    "count": 0,
+                    "percentage": 0.0
+                },
+                "Price": {
+                    "count": 0,
+                    "percentage": 0.0
+                },
+                "Customer ID": {
+                    "count": 107927,
+                    "percentage": 20.54
+                },
+                "Country": {
+                    "count": 0,
+                    "percentage": 0.0
+                }
+            },
+            "date_range": {
+                "minimum": "2009-12-01 07:45:00",
+                "maximum": "2010-12-09 20:01:00"
+            },
+            "memory_usage_mb": 131.56
+        },
+        "Year 2010-2011": {
+            "row_count": 541910,
+            "column_count": 8,
+            "columns": [
+                "Invoice",
+                "StockCode",
+                "Description",
+                "Quantity",
+                "InvoiceDate",
+                "Price",
+                "Customer ID",
+                "Country"
+            ],
+            "data_types": {
+                "Invoice": "object",
+                "StockCode": "object",
+                "Description": "object",
+                "Quantity": "int64",
+                "InvoiceDate": "datetime64[us]",
+                "Price": "float64",
+                "Customer ID": "float64",
+                "Country": "str"
+            },
+            "missing_values": {
+                "Invoice": {
+                    "count": 0,
+                    "percentage": 0.0
+                },
+                "StockCode": {
+                    "count": 0,
+                    "percentage": 0.0
+                },
+                "Description": {
+                    "count": 1454,
+                    "percentage": 0.27
+                },
+                "Quantity": {
+                    "count": 0,
+                    "percentage": 0.0
+                },
+                "InvoiceDate": {
+                    "count": 0,
+                    "percentage": 0.0
+                },
+                "Price": {
+                    "count": 0,
+                    "percentage": 0.0
+                },
+                "Customer ID": {
+                    "count": 135080,
+                    "percentage": 24.93
+                },
+                "Country": {
+                    "count": 0,
+                    "percentage": 0.0
+                }
+            },
+            "date_range": {
+                "minimum": "2010-12-01 08:26:00",
+                "maximum": "2011-12-09 12:50:00"
+            },
+            "memory_usage_mb": 134.93
+        }
+    }
+}

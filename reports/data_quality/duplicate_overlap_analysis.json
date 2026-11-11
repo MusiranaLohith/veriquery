@@ -1,0 +1,74 @@
+{
+    "source_file": "online_retail_II.xlsx",
+    "analysis_timestamp_utc": "2026-11-10T07:52:26.229966+00:00",
+    "date_overlap": {
+        "dates_in_first_sheet": 307,
+        "dates_in_second_sheet": 305,
+        "common_dates_count": 8,
+        "common_dates": [
+            "2010-12-01",
+            "2010-12-02",
+            "2010-12-03",
+            "2010-12-05",
+            "2010-12-06",
+            "2010-12-07",
+            "2010-12-08",
+            "2010-12-09"
+        ]
+    },
+    "invoice_overlap": {
+        "unique_invoices_first_sheet": 28816,
+        "unique_invoices_second_sheet": 25900,
+        "common_invoice_identifiers": 1088
+    },
+    "cross_sheet_exact_overlap": {
+        "unique_matching_records": 22202,
+        "shared_row_occurrences": 22523,
+        "additional_occurrences_first_sheet": 0,
+        "additional_occurrences_second_sheet": 0
+    },
+    "within_sheet_duplicates": {
+        "Year 2009-2010": {
+            "rows_belonging_to_duplicate_groups": 13283,
+            "unique_duplicate_groups": 6418,
+            "additional_repeated_rows": 6865,
+            "maximum_occurrences": 6
+        },
+        "Year 2010-2011": {
+            "rows_belonging_to_duplicate_groups": 10147,
+            "unique_duplicate_groups": 4879,
+            "additional_repeated_rows": 5268,
+            "maximum_occurrences": 20
+        }
+    },
+    "duplicate_classification": {
+        "Year 2009-2010": [
+            {
+                "invoice_type": "C-prefixed",
+                "quantity_type": "Negative",
+                "duplicate_groups": 23,
+                "additional_repeated_rows": 24
+            },
+            {
+                "invoice_type": "Other",
+                "quantity_type": "Positive",
+                "duplicate_groups": 6395,
+                "additional_repeated_rows": 6841
+            }
+        ],
+        "Year 2010-2011": [
+            {
+                "invoice_type": "C-prefixed",
+                "quantity_type": "Negative",
+                "duplicate_groups": 32,
+                "additional_repeated_rows": 37
+            },
+            {
+                "invoice_type": "Other",
+                "quantity_type": "Positive",
+                "duplicate_groups": 4847,
+                "additional_repeated_rows": 5231
+            }
+        ]
+    }
+}

@@ -1,0 +1,440 @@
+stock_code,description,occurrences,preliminary_annotation
+10133,damaged,1,condition_or_adjustment_candidate
+16168S,missing,1,condition_or_adjustment_candidate
+16169C,damages,1,condition_or_adjustment_candidate
+16245A,damaged,1,condition_or_adjustment_candidate
+17013C,missing,1,condition_or_adjustment_candidate
+17027A,MISSING,1,condition_or_adjustment_candidate
+17108D,missing?,1,other
+17109D,Adjustment,1,condition_or_adjustment_candidate
+17129D,missing (wrongly coded?),1,other
+20665,adjustment,1,condition_or_adjustment_candidate
+20665,dotcom,1,channel_reference_candidate
+20712,missing,1,condition_or_adjustment_candidate
+20713,missing,1,condition_or_adjustment_candidate
+20714,missing,1,condition_or_adjustment_candidate
+20774,damaged,1,condition_or_adjustment_candidate
+20786,Damages,1,condition_or_adjustment_candidate
+20787,damaged,2,condition_or_adjustment_candidate
+20799,damaged,1,condition_or_adjustment_candidate
+20803,damages,1,condition_or_adjustment_candidate
+20820,damages,1,condition_or_adjustment_candidate
+20821,damages,1,condition_or_adjustment_candidate
+20825,damages,1,condition_or_adjustment_candidate
+20827,damages,1,condition_or_adjustment_candidate
+20830,damages,1,condition_or_adjustment_candidate
+20839,damages,1,condition_or_adjustment_candidate
+20840,damages,1,condition_or_adjustment_candidate
+20893,damages,1,condition_or_adjustment_candidate
+20893,damages/display,1,other
+20914,damages,1,condition_or_adjustment_candidate
+20967,Amazon Adjustment,1,condition_or_adjustment_candidate
+20984,damaged,1,condition_or_adjustment_candidate
+21007,damages?,1,other
+21018,damaged,1,condition_or_adjustment_candidate
+21041,missing,1,condition_or_adjustment_candidate
+21089,damaged,1,condition_or_adjustment_candidate
+21090,WET/MOULDY,1,other
+21098,damages?,1,other
+21100,Damaged,1,condition_or_adjustment_candidate
+21130,damaged,1,condition_or_adjustment_candidate
+21135,sold as set on dotcom,1,channel_reference_candidate
+21136,sold as set on dotcom,1,channel_reference_candidate
+21153,missing,1,condition_or_adjustment_candidate
+21159,damaged,1,condition_or_adjustment_candidate
+21179,damaged,1,condition_or_adjustment_candidate
+21181,adjustment,2,condition_or_adjustment_candidate
+21181,dotcom,1,channel_reference_candidate
+21181,missing,1,condition_or_adjustment_candidate
+21246,damaged,1,condition_or_adjustment_candidate
+21294,damaged,1,condition_or_adjustment_candidate
+21312,damaged,1,condition_or_adjustment_candidate
+21319,adjustment,1,condition_or_adjustment_candidate
+21320,broken,1,condition_or_adjustment_candidate
+21347,GOTHIC CARRIAGE LANTERN,4,other
+21351,damaged,1,condition_or_adjustment_candidate
+21391,Sold as 1 on dotcom,1,channel_reference_candidate
+21394,damages,1,condition_or_adjustment_candidate
+21397,damaged,1,condition_or_adjustment_candidate
+21398,damages,1,condition_or_adjustment_candidate
+21421,damaged,1,condition_or_adjustment_candidate
+21424,damages,1,condition_or_adjustment_candidate
+21431,crushed,1,condition_or_adjustment_candidate
+21450,damaged,1,condition_or_adjustment_candidate
+21463,damaged,2,condition_or_adjustment_candidate
+21527,damages,1,condition_or_adjustment_candidate
+21529,damages,1,condition_or_adjustment_candidate
+21532,damaged,1,condition_or_adjustment_candidate
+21539,damages?,1,other
+21540,damages,1,condition_or_adjustment_candidate
+21542,missing,1,condition_or_adjustment_candidate
+21545,damages,1,condition_or_adjustment_candidate
+21621,rcvd be air temp fix for dotcom sit,1,channel_reference_candidate
+21621,re dotcom quick fix.,1,channel_reference_candidate
+21622,damages,1,condition_or_adjustment_candidate
+21622,POSSIBLE DAMAGES OR LOST?,1,other
+21643,damaged,1,condition_or_adjustment_candidate
+21652,damages,1,condition_or_adjustment_candidate
+21654,Damaged,1,condition_or_adjustment_candidate
+21700,sold as set on dotcom and amazon,1,channel_reference_candidate
+21735,broken glass,1,other
+21735,damages,1,condition_or_adjustment_candidate
+21735,Damages,1,condition_or_adjustment_candidate
+21736,Adjustment,1,condition_or_adjustment_candidate
+21760,damaged,1,condition_or_adjustment_candidate
+21761,damaged,1,condition_or_adjustment_candidate
+21781,damages?,1,other
+21794,adjustment,1,condition_or_adjustment_candidate
+21804,dotcom,1,channel_reference_candidate
+21823,amazon adjust,1,channel_reference_candidate
+21823,damaged,1,condition_or_adjustment_candidate
+21829,adjustment,1,condition_or_adjustment_candidate
+21829,?missing,1,other
+21830,damaged,1,condition_or_adjustment_candidate
+21830,OOPS ! adjustment,1,other
+21833,damages,1,condition_or_adjustment_candidate
+21843,broken,1,condition_or_adjustment_candidate
+21843,damaged,2,condition_or_adjustment_candidate
+21868,Amazon,1,channel_reference_candidate
+21877,damages,1,condition_or_adjustment_candidate
+21888,Amazon,1,channel_reference_candidate
+21890,missing,1,condition_or_adjustment_candidate
+22016,Dotcomgiftshop Gift Voucher £100.00,1,channel_reference_candidate
+22043,dotcom,1,channel_reference_candidate
+22049,damaged,1,condition_or_adjustment_candidate
+22058,damaged?,1,other
+22060,damaged,1,condition_or_adjustment_candidate
+22087,Amazon,1,channel_reference_candidate
+22127,Dotcom sold in 6's,1,channel_reference_candidate
+22128,sold as set on dotcom,1,channel_reference_candidate
+22130,sold as set on dotcom,1,channel_reference_candidate
+22138,damages,1,condition_or_adjustment_candidate
+22138,mouldy,1,condition_or_adjustment_candidate
+22139,amazon,1,channel_reference_candidate
+22149,damages,1,condition_or_adjustment_candidate
+22165,damaged,1,condition_or_adjustment_candidate
+22167,damaged,1,condition_or_adjustment_candidate
+22168,Damages,1,condition_or_adjustment_candidate
+22171,damaged,1,condition_or_adjustment_candidate
+22176,amazon,1,channel_reference_candidate
+22206,"MUG , DOTCOMGIFTSHOP.COM",10,channel_reference_candidate
+22217,damages?,1,other
+22272,Damaged,1,condition_or_adjustment_candidate
+22336,damaged,1,condition_or_adjustment_candidate
+22351,DOTCOMGIFTSHOP TEA TOWEL,3,channel_reference_candidate
+22423,"broken, uneven bottom",1,other
+22423,damaged,3,condition_or_adjustment_candidate
+22423,damages,2,condition_or_adjustment_candidate
+22423,faulty,1,condition_or_adjustment_candidate
+22423,wonky bottom/broken,1,other
+22427,damages,1,condition_or_adjustment_candidate
+22435,?missing,1,other
+22458,Missing,1,condition_or_adjustment_candidate
+22467,wrong code?,1,other
+22469,missing,1,condition_or_adjustment_candidate
+22470,crushed,1,condition_or_adjustment_candidate
+22487,damages,1,condition_or_adjustment_candidate
+22501,incorrectly put back into stock,1,other
+22501,reverse 21/5/10 adjustment,1,other
+22502,reverse 21/5/10 adjustment,1,other
+22548,adjustment,1,condition_or_adjustment_candidate
+22568,?? missing,1,other
+22575,missing?,1,other
+22579,dotcom,1,channel_reference_candidate
+22607,damages,1,condition_or_adjustment_candidate
+22617,"mouldy, thrown away.",1,other
+22618,"mouldy, unsaleable.",1,other
+22637,damages,1,condition_or_adjustment_candidate
+22655,damages/showroom etc,1,other
+22667,damaged,1,condition_or_adjustment_candidate
+22687,adjustment,1,condition_or_adjustment_candidate
+22687,amazon adjustment,1,condition_or_adjustment_candidate
+22719,wrong code,1,other
+22734,amazon,3,channel_reference_candidate
+22734,amazon adjustment,1,condition_or_adjustment_candidate
+22734,amazon sales,1,channel_reference_candidate
+22740,adjustment,1,condition_or_adjustment_candidate
+22784,damages,1,condition_or_adjustment_candidate
+22784,Incorrectly entered. should be 2279,1,other
+22785,broken zips,1,other
+22786,broken zips,1,other
+22792,damages,1,condition_or_adjustment_candidate
+22797,damages,2,condition_or_adjustment_candidate
+22848,AMAZON,1,channel_reference_candidate
+22856,sold as set on dotcom,1,channel_reference_candidate
+22857,sold as set on dotcom,1,channel_reference_candidate
+22902,dotcom,1,channel_reference_candidate
+22902,dotcom email,1,channel_reference_candidate
+22915,sold as set on dotcom,1,channel_reference_candidate
+22922,sold as set on dotcom,1,channel_reference_candidate
+22923,sold as set on dotcom,1,channel_reference_candidate
+22924,sold as set on dotcom,1,channel_reference_candidate
+22925,AMAZON,1,channel_reference_candidate
+22927,Amazon,1,channel_reference_candidate
+22927,damaged,1,condition_or_adjustment_candidate
+22944,sold as set on dotcom,1,channel_reference_candidate
+22945,sold as set on dotcom,1,channel_reference_candidate
+22948,sold as set on dotcom,1,channel_reference_candidate
+22968,water damage,1,other
+23001,TRAVEL CARD WALLET DOTCOMGIFTSHOP,1,channel_reference_candidate
+23028,DOORKNOB CRACKED GLAZE BLUE,3,other
+23029,damages,1,condition_or_adjustment_candidate
+23029,DOORKNOB CRACKED GLAZE GREEN,2,other
+23031,DOORKNOB CRACKED GLAZE PINK,2,other
+23032,damages,1,condition_or_adjustment_candidate
+23032,DOORKNOB CRACKED GLAZE IVORY,6,other
+23064,Crushed,1,condition_or_adjustment_candidate
+23071,damages,1,condition_or_adjustment_candidate
+23072,damages,1,condition_or_adjustment_candidate
+23084,allocate stock for dotcom orders ta,1,channel_reference_candidate
+23084,Amazon,1,channel_reference_candidate
+23084,temp adjustment,1,other
+23090,missing,1,condition_or_adjustment_candidate
+23099,FRENCH CARRIAGE LANTERN,63,other
+23113,Damaged,1,condition_or_adjustment_candidate
+23114,Damaged,1,condition_or_adjustment_candidate
+23115,Damaged,1,condition_or_adjustment_candidate
+23116,Damaged,1,condition_or_adjustment_candidate
+23117,Damaged,1,condition_or_adjustment_candidate
+23118,dotcom adjust,1,channel_reference_candidate
+23155,sold as set on dotcom,1,channel_reference_candidate
+23268,Incorrect stock entry.,1,other
+23269,incorrect stock entry.,1,other
+23270,incorrect stock entry.,1,other
+23322,mouldy,1,condition_or_adjustment_candidate
+23397,damaged,1,condition_or_adjustment_candidate
+23427,damaged,1,condition_or_adjustment_candidate
+23444,Next Day Carriage,80,other
+23462,damages,1,condition_or_adjustment_candidate
+23595,adjustment,1,condition_or_adjustment_candidate
+23595,re-adjustment,1,other
+35001G,damages,1,condition_or_adjustment_candidate
+35001W,broken,1,condition_or_adjustment_candidate
+35001W,damages,1,condition_or_adjustment_candidate
+35015,wet damages,1,other
+35241,damages?,1,other
+35400,damages,1,condition_or_adjustment_candidate
+35600D,damages,1,condition_or_adjustment_candidate
+35605A,damages,1,condition_or_adjustment_candidate
+35611B,damaged,1,condition_or_adjustment_candidate
+35816B,damaged,1,condition_or_adjustment_candidate
+35818B,adjustment,1,condition_or_adjustment_candidate
+35824C,damaged,1,condition_or_adjustment_candidate
+35824P,damages,1,condition_or_adjustment_candidate
+35833G,damages,1,condition_or_adjustment_candidate
+35838B,missing,1,condition_or_adjustment_candidate
+35915C,damaged,1,condition_or_adjustment_candidate
+35965,dotcom,1,channel_reference_candidate
+35978,damages,2,condition_or_adjustment_candidate
+37327,adjustment,1,condition_or_adjustment_candidate
+37327,damages,1,condition_or_adjustment_candidate
+37327,sold as set on dotcom,1,channel_reference_candidate
+37340,sold as set on dotcom,1,channel_reference_candidate
+37343,damaged,1,condition_or_adjustment_candidate
+37370,damages/dotcom?,1,channel_reference_candidate
+37370,sold as set/6 by dotcom,1,channel_reference_candidate
+37410,damages,1,condition_or_adjustment_candidate
+37448,damages,1,condition_or_adjustment_candidate
+37450,missing,1,condition_or_adjustment_candidate
+37471,sold as set on dotcom,1,channel_reference_candidate
+37479B,sold as set by dotcom,1,channel_reference_candidate
+37479P,damages,1,condition_or_adjustment_candidate
+37479P,sold as set on dotcom,1,channel_reference_candidate
+37482P,Damaged,1,condition_or_adjustment_candidate
+37487B,Damaged,1,condition_or_adjustment_candidate
+37488A,damaged,1,condition_or_adjustment_candidate
+37503,damaged,1,condition_or_adjustment_candidate
+40016,damaged stock,1,other
+46000M,Dotcom,1,channel_reference_candidate
+46000M,Dotcom sales,1,channel_reference_candidate
+46000R,dotcom sales,1,channel_reference_candidate
+46000S,Dotcom,1,channel_reference_candidate
+46000S,dotcom sales,1,channel_reference_candidate
+46000S,Dotcom sales,1,channel_reference_candidate
+46000U,dotcom,1,channel_reference_candidate
+47013A,damaged,1,condition_or_adjustment_candidate
+47566B,correct previous adjustment,1,other
+47566B,incorrectly credited C550456 see 47,2,condition_or_adjustment_candidate
+47566B,missing,1,condition_or_adjustment_candidate
+47566B,reverse previous adjustment,1,other
+47566B,stock credited from royal yacht inc,1,other
+47567B,missing,1,condition_or_adjustment_candidate
+47591C,missing,1,condition_or_adjustment_candidate
+48173C,damaged,1,condition_or_adjustment_candidate
+48189,adjustment,1,condition_or_adjustment_candidate
+48189,damaged,1,condition_or_adjustment_candidate
+51020A,adjustment,1,condition_or_adjustment_candidate
+71279,damages,1,condition_or_adjustment_candidate
+71459,dotcom,1,channel_reference_candidate
+72038B,damaged,1,condition_or_adjustment_candidate
+72038P,damages,1,condition_or_adjustment_candidate
+72741,dotcom,1,channel_reference_candidate
+72750A,damages,1,condition_or_adjustment_candidate
+72754A,damaged,1,condition_or_adjustment_candidate
+72755D,missing,1,condition_or_adjustment_candidate
+72802C,damages,1,condition_or_adjustment_candidate
+72803A,damages,1,condition_or_adjustment_candidate
+72807A,AMAZON,1,channel_reference_candidate
+72807A,damages,1,condition_or_adjustment_candidate
+72807A,???missing,1,other
+72807B,damages,1,condition_or_adjustment_candidate
+72807B,????missing,1,other
+72807C,damages,1,condition_or_adjustment_candidate
+72807C,???missing,1,other
+72817,dotcomstock,1,channel_reference_candidate
+75149N,missing,1,condition_or_adjustment_candidate
+77081,missing,1,condition_or_adjustment_candidate
+79000,damaged,1,condition_or_adjustment_candidate
+79000,Dotcom,1,channel_reference_candidate
+79030D,damages,1,condition_or_adjustment_candidate
+79030G,damages,1,condition_or_adjustment_candidate
+79030G,Water damaged,1,other
+79051A,sold as set on dotcom,1,channel_reference_candidate
+79163,damaged,1,condition_or_adjustment_candidate
+79163,sold as set on dotcom,1,channel_reference_candidate
+79164,damages/credits from ASOS.,1,other
+79302M,crushed,1,condition_or_adjustment_candidate
+79323B,"Unsaleable, destroyed.",1,other
+79323G,"Unsaleable, destroyed.",1,other
+79323GR,"Unsaleable, destroyed.",1,other
+79323LP,"Unsaleable, destroyed.",1,other
+79323P,"Unsaleable, destroyed.",1,other
+79323S,"Unsaleable, destroyed.",1,other
+79323W,"Unsaleable, destroyed.",1,other
+79341,"Unsaleable, destroyed.",1,other
+79342B,"Unsaleable, destroyed.",1,other
+82483,crushed,1,condition_or_adjustment_candidate
+82494L,cracked,1,condition_or_adjustment_candidate
+82494L,crushed ctn,1,other
+82494L,MISSING,1,condition_or_adjustment_candidate
+82582,missings,1,other
+82583,amazon,2,channel_reference_candidate
+82607A,damages,1,condition_or_adjustment_candidate
+82607C,damages,1,condition_or_adjustment_candidate
+82613A,Amazon,1,channel_reference_candidate
+84078A,damages etc,1,other
+84228,crushed,1,condition_or_adjustment_candidate
+84249A,damaged,1,condition_or_adjustment_candidate
+84270,Damaged,1,condition_or_adjustment_candidate
+84313B,Damaged,1,condition_or_adjustment_candidate
+84313C,damaged,1,condition_or_adjustment_candidate
+84352,Damages/samples,1,other
+84356,damaged,1,condition_or_adjustment_candidate
+84367,crushed,1,condition_or_adjustment_candidate
+84405A,damaged,1,condition_or_adjustment_candidate
+84406B,damaged,1,condition_or_adjustment_candidate
+84406B,incorrectly made-thrown away.,1,other
+84414B,damaged,1,condition_or_adjustment_candidate
+84454,missing,1,condition_or_adjustment_candidate
+84507C,adjustment,1,condition_or_adjustment_candidate
+84563A,damaged,1,condition_or_adjustment_candidate
+84563B,damaged,1,condition_or_adjustment_candidate
+84576,damaged,1,condition_or_adjustment_candidate
+84578,damages,1,condition_or_adjustment_candidate
+84597B,damages,1,condition_or_adjustment_candidate
+84609,damages,1,condition_or_adjustment_candidate
+84625B,Damaged,1,condition_or_adjustment_candidate
+84641,damages,1,condition_or_adjustment_candidate
+84660A,damaged,1,condition_or_adjustment_candidate
+84665,water damaged,1,other
+84670,missing,1,condition_or_adjustment_candidate
+84680,damages?,1,other
+84691,damages,1,condition_or_adjustment_candidate
+84709A,Damaged,1,condition_or_adjustment_candidate
+84743C,damages,1,condition_or_adjustment_candidate
+84750A,damages,1,condition_or_adjustment_candidate
+84782A,"damages, lost bits etc",1,other
+84782B,"damages, lost bits etc",1,other
+84795D,missing,1,condition_or_adjustment_candidate
+84800L,wet damaged,1,other
+84801A,wet damaged,1,other
+84804A,wet damaged,1,other
+84805A,wet damaged,1,other
+84805B,wet damaged,1,other
+84807,damages,1,condition_or_adjustment_candidate
+84809B,damaged,1,condition_or_adjustment_candidate
+84816,damages,1,condition_or_adjustment_candidate
+84818,damages,1,condition_or_adjustment_candidate
+84839,damaged,1,condition_or_adjustment_candidate
+84865,damaged,1,condition_or_adjustment_candidate
+84869,damages,1,condition_or_adjustment_candidate
+84876D,damaged,1,condition_or_adjustment_candidate
+84879,damaged,1,condition_or_adjustment_candidate
+84879,Dotcom multiples,1,channel_reference_candidate
+84912B,damaged,1,condition_or_adjustment_candidate
+84918,damages,1,condition_or_adjustment_candidate
+84925D,incorrect credit,1,other
+84932D,damages,1,condition_or_adjustment_candidate
+84934,missing,1,condition_or_adjustment_candidate
+84937,Amazon sold as set,1,channel_reference_candidate
+84937,Dotcom sold as set,1,channel_reference_candidate
+84945,dotcom,1,channel_reference_candidate
+84950,dotcom,1,channel_reference_candidate
+84968B,"rust,missing sets etc",1,other
+84978,damages,1,condition_or_adjustment_candidate
+85017C,adjustment,1,condition_or_adjustment_candidate
+85019C,Damaged,1,condition_or_adjustment_candidate
+85032D,damaged,1,condition_or_adjustment_candidate
+85034A,damaged,1,condition_or_adjustment_candidate
+85036B,damages wax,1,other
+85036C,damages wax,1,other
+85049B,Amazon,1,channel_reference_candidate
+85060,damaged,1,condition_or_adjustment_candidate
+85060,damaged/dirty,1,other
+85063,damaged,1,condition_or_adjustment_candidate
+85065,damaged,1,condition_or_adjustment_candidate
+85078,missing,2,condition_or_adjustment_candidate
+85084,Damages,1,condition_or_adjustment_candidate
+85099B,missing,1,condition_or_adjustment_candidate
+85104,????damages????,1,other
+85112,damaged,1,condition_or_adjustment_candidate
+85124A,damaged,1,condition_or_adjustment_candidate
+85132A,damaged,1,condition_or_adjustment_candidate
+85132C,damages,1,condition_or_adjustment_candidate
+85135C,Damages,1,condition_or_adjustment_candidate
+85136A,damages,1,condition_or_adjustment_candidate
+85136C,damages,1,condition_or_adjustment_candidate
+85161,damaged,1,condition_or_adjustment_candidate
+85161,samples/damages,1,other
+85165,damages,1,condition_or_adjustment_candidate
+85167B,DAMAGED,1,condition_or_adjustment_candidate
+85168A,WHITE BAROQUE CARRIAGE CLOCK,15,other
+85168B,BLACK BAROQUE CARRIAGE CLOCK,53,other
+85172,Dotcom set,1,channel_reference_candidate
+85175,Amazon sold sets,1,channel_reference_candidate
+85175,dotcom sold sets,1,channel_reference_candidate
+85215,Damaged,1,condition_or_adjustment_candidate
+85215,sold as set/6 on dotcom,1,channel_reference_candidate
+85216,DOTCOM SETS,1,channel_reference_candidate
+85217,Dotcom multiple,1,channel_reference_candidate
+85230E,Damaged,1,condition_or_adjustment_candidate
+85231G,amazon,1,channel_reference_candidate
+85232B,wrong code,1,other
+90050,CRACKED GLAZE NECKLACE IVORY,7,other
+90051,CRACKED GLAZE NECKLACE RED,11,other
+90052,CRACKED GLAZE NECKLACE BROWN,5,other
+90053,CRACKED GLAZE EARRINGS IVORY,10,other
+90054,CRACKED GLAZE EARRINGS RED,17,other
+90055,CRACKED GLAZE EARRINGS BROWN,10,other
+90056,CHUNKY CRACKED GLAZE NECKLACE IVORY,14,other
+90057,crushed boxes,1,other
+ADJUST,Adjustment by john on 26/01/2010 16,38,condition_or_adjustment_candidate
+ADJUST,Adjustment by john on 26/01/2010 17,26,condition_or_adjustment_candidate
+ADJUST,Adjustment by Peter on 24/05/2010 1,3,condition_or_adjustment_candidate
+ADJUST2,Adjustment by Peter on Jun 25 2010,3,condition_or_adjustment_candidate
+AMAZONFEE,AMAZON FEE,36,operational_entry_candidate
+BANK CHARGES,Bank Charges,100,operational_entry_candidate
+C2,CARRIAGE,274,operational_entry_candidate
+CRUK,CRUK Commission,16,operational_entry_candidate
+D,Discount,173,operational_entry_candidate
+DOT,DOTCOM POSTAGE,1423,operational_entry_candidate
+gift_0001_10,Dotcomgiftshop Gift Voucher £10.00,14,channel_reference_candidate
+gift_0001_20,Dotcomgiftshop Gift Voucher £20.00,26,channel_reference_candidate
+gift_0001_30,Dotcomgiftshop Gift Voucher £30.00,24,channel_reference_candidate
+gift_0001_40,Dotcomgiftshop Gift Voucher £40.00,5,channel_reference_candidate
+gift_0001_50,Dotcomgiftshop Gift Voucher £50.00,6,channel_reference_candidate
+gift_0001_70,Dotcomgiftshop Gift Voucher £70.00,1,channel_reference_candidate
+gift_0001_80,Dotcomgiftshop Gift Voucher £80.00,2,channel_reference_candidate
+m,Manual,5,operational_entry_candidate
+M,Manual,1398,operational_entry_candidate
+POST,POSTAGE,2079,operational_entry_candidate

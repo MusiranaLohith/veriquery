@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Environments
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Dataset files
+data/raw/
+data/processed/
+
+# Generated image
+/json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Locked evaluation data - keep private
+data/benchmark/locked_test/
+
+# Locked-test construction scripts - keep private
+scripts/benchmark/06_*.py
+scripts/benchmark/07_*.py
+scripts/benchmark/08_*.py
+scripts/benchmark/09_*.py
+scripts/benchmark/10_*.py
+scripts/benchmark/11_*.py
+scripts/benchmark/13_*.py
+scripts/benchmark/14_*.py
+scripts/benchmark/15_*.py
+scripts/benchmark/16_*.py
+scripts/benchmark/17_*.py
+scripts/benchmark/18_*.py
+scripts/benchmark/19_*.py
+scripts/benchmark/20_*.py
+scripts/benchmark/21_*.py
+
+# Private development/test overlap audit - contains test wording
+reports/benchmark/dev_test_overlap_audit.json

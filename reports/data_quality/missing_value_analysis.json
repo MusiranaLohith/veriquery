@@ -1,0 +1,94 @@
+{
+    "source_file": "online_retail_II.xlsx",
+    "inspection_timestamp_utc": "2026-11-09T19:56:43.023928+00:00",
+    "worksheets": {
+        "Year 2009-2010": {
+            "total_records": 525461,
+            "missing_value_relationships": {
+                "both_missing": 2928,
+                "description_only": 0,
+                "customer_id_only": 104999,
+                "neither_missing": 417534
+            },
+            "missing_description_stockcodes": {
+                "22950": 10,
+                "84990": 9,
+                "22139": 8,
+                "79321": 7,
+                "21768": 7,
+                "84795D": 7,
+                "37446": 6,
+                "21478": 6,
+                "72803B": 6,
+                "21340": 6,
+                "35970": 6,
+                "84845C": 6,
+                "20747": 6,
+                "84467": 6,
+                "37461": 6
+            },
+            "missing_customer_countries": {
+                "United Kingdom": 106429,
+                "EIRE": 960,
+                "United Arab Emirates": 114,
+                "Portugal": 77,
+                "Hong Kong": 76,
+                "Bahrain": 65,
+                "France": 62,
+                "RSA": 46,
+                "Bermuda": 34,
+                "Unspecified": 30,
+                "Sweden": 19,
+                "Lebanon": 13,
+                "Nigeria": 2
+            },
+            "cancellations": {
+                "total_rows": 10206,
+                "missing_customer_id": 367,
+                "missing_description": 0
+            }
+        },
+        "Year 2010-2011": {
+            "total_records": 541910,
+            "missing_value_relationships": {
+                "both_missing": 1454,
+                "description_only": 0,
+                "customer_id_only": 133626,
+                "neither_missing": 406830
+            },
+            "missing_description_stockcodes": {
+                "35965": 10,
+                "23084": 10,
+                "22084": 9,
+                "22451": 6,
+                "21784": 5,
+                "22501": 5,
+                "22866": 5,
+                "23348": 5,
+                "21067": 5,
+                "21033": 5,
+                "22139": 4,
+                "84534B": 4,
+                "22034": 4,
+                "22114": 4,
+                "21429": 4
+            },
+            "missing_customer_countries": {
+                "United Kingdom": 133600,
+                "EIRE": 711,
+                "Hong Kong": 288,
+                "Unspecified": 202,
+                "Switzerland": 125,
+                "France": 66,
+                "Israel": 47,
+                "Portugal": 39,
+                "Bahrain": 2
+            },
+            "cancellations": {
+                "total_rows": 9288,
+                "missing_customer_id": 383,
+                "missing_description": 0
+            }
+        }
+    }
+}

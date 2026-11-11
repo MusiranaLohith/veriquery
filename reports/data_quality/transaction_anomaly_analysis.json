@@ -1,0 +1,74 @@
+{
+    "source_file": "online_retail_II.xlsx",
+    "analysis_timestamp_utc": "2026-11-10T08:20:19.376944+00:00",
+    "worksheets": {
+        "Year 2009-2010": {
+            "total_rows": 525461,
+            "invoice_analysis": {
+                "c_prefixed_rows": 10206,
+                "unique_c_prefixed_invoices": 4592
+            },
+            "quantity_analysis": {
+                "negative_rows": 12326,
+                "zero_rows": 0,
+                "positive_rows": 513135,
+                "negative_with_c_prefix": 10205,
+                "negative_without_c_prefix": 2121,
+                "c_prefixed_non_negative": 1
+            },
+            "price_analysis": {
+                "zero_price_rows": 3687,
+                "negative_price_rows": 3,
+                "positive_price_rows": 521771
+            },
+            "stock_code_analysis": {
+                "unique_stock_codes": 4632,
+                "special_code_counts": {
+                    "M": 850,
+                    "B": 3,
+                    "D": 100,
+                    "POST": 865,
+                    "DOT": 736,
+                    "BANK CHARGES": 65,
+                    "AMAZONFEE": 9,
+                    "C2": 138,
+                    "CRUK": 0
+                }
+            }
+        },
+        "Year 2010-2011": {
+            "total_rows": 541910,
+            "invoice_analysis": {
+                "c_prefixed_rows": 9288,
+                "unique_c_prefixed_invoices": 3836
+            },
+            "quantity_analysis": {
+                "negative_rows": 10624,
+                "zero_rows": 0,
+                "positive_rows": 531286,
+                "negative_with_c_prefix": 9288,
+                "negative_without_c_prefix": 1336,
+                "c_prefixed_non_negative": 0
+            },
+            "price_analysis": {
+                "zero_price_rows": 2515,
+                "negative_price_rows": 2,
+                "positive_price_rows": 539393
+            },
+            "stock_code_analysis": {
+                "unique_stock_codes": 4070,
+                "special_code_counts": {
+                    "M": 571,
+                    "B": 3,
+                    "D": 77,
+                    "POST": 1257,
+                    "DOT": 710,
+                    "BANK CHARGES": 37,
+                    "AMAZONFEE": 34,
+                    "C2": 144,
+                    "CRUK": 16
+                }
+            }
+        }
+    }
+}
