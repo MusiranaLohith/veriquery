@@ -1,10 +1,18 @@
 
 from dataclasses import dataclass
+from typing import Protocol
 
 from veriquery.benchmark.models import BenchmarkQuestion
 from veriquery.experiments.recorder import ExperimentRecorder
-from veriquery.llm.client import GeminiSQLClient
+from veriquery.llm.client import GenerationResult
 from veriquery.llm.prompts import build_prompt, PROMPT_VERSION
+
+
+class SQLGenerationClient(Protocol):
+    """Interface shared by all SQL generation providers."""
+
+    def generate(self, prompt: str) -> GenerationResult:
+        ...
 
 
 @dataclass
@@ -18,11 +26,11 @@ class BenchmarkRunSummary:
 
 
 class BenchmarkExecutor:
-    """Execute development benchmark questions using the full-schema baseline."""
+    """Execute the full-schema baseline using any compatible LLM client."""
 
     def __init__(
         self,
-        client: GeminiSQLClient,
+        client: SQLGenerationClient,
         recorder: ExperimentRecorder,
     ):
         self.client = client
@@ -44,7 +52,6 @@ class BenchmarkExecutor:
             )
 
             prompt = build_prompt(question.question)
-
             result = self.client.generate(prompt)
 
             self.recorder.record(

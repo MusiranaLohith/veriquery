@@ -151,3 +151,27 @@ def test_attempted_question_ids_includes_successful_and_failed_attempts(tmp_path
     recorder.record("DEV002", "baseline-v1", failure_result)
 
     assert recorder.attempted_question_ids() == {"DEV001", "DEV002"}
+
+
+
+
+def test_record_includes_provider_and_experiment_metadata(tmp_path):
+    recorder = ExperimentRecorder(
+        tmp_path / "results.jsonl",
+        provider="groq",
+        experiment_id="full-schema-baseline",
+    )
+
+    recorder.record(
+        "DEV001",
+        "full-schema-baseline-v1",
+        create_success_result(),
+    )
+
+    records = recorder.load_records()
+    record = records[0]
+
+    assert record["provider"] == "groq"
+    assert record["experiment_id"] == "full-schema-baseline"
+    assert record["question_id"] == "DEV001"
+    assert record["model_id"] == "test-model"

@@ -1,10 +1,8 @@
-
-import os
 import json
-from pathlib import Path
 from time import perf_counter
 
-from dotenv import load_dotenv
+from veriquery.llm.config import get_api_key
+
 from groq import Groq
 from groq import APIStatusError, APITimeoutError
 from pydantic import ValidationError
@@ -63,9 +61,7 @@ class GroqSQLClient:
         request_timeout: int = 45,
     ):
         if api_key is None:
-            project_root = Path(__file__).resolve().parents[3]
-            load_dotenv(project_root / ".env")
-            api_key = os.getenv("GROQ_API_KEY")
+            api_key = get_api_key("groq")
 
         if not api_key:
             raise ValueError(

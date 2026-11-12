@@ -9,9 +9,15 @@ from veriquery.llm.client import GenerationResult
 class ExperimentRecorder:
     """Append LLM generation attempts to a JSONL experiment file."""
 
-    def __init__(self, output_path: Path):
+    def __init__(
+        self,
+        output_path: Path,
+        provider: str = "unspecified",
+        experiment_id: str = "full-schema-baseline",
+    ):
         self.output_path = Path(output_path)
-
+        self.provider = provider
+        self.experiment_id = experiment_id
 
     def load_records(self) -> list[dict]:
         """Load previously recorded experiment attempts."""
@@ -35,25 +41,21 @@ class ExperimentRecorder:
 
         return records
 
-
     def completed_question_ids(self) -> set[str]:
         """Return question IDs with at least one successful attempt."""
 
-        records = self.load_records()
-
         return {
             record["question_id"]
-            for record in records
+            for record in self.load_records()
             if record.get("api_status") == "success"
         }
 
     def attempted_question_ids(self) -> set[str]:
         """Return question IDs that have at least one recorded attempt."""
-        records = self.load_records()
 
         return {
             record["question_id"]
-            for record in records
+            for record in self.load_records()
         }
 
     def record(
@@ -63,9 +65,12 @@ class ExperimentRecorder:
         result: GenerationResult,
     ) -> None:
         """Append one generation attempt as a JSON object."""
+
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
 
         record = {
+            "experiment_id": self.experiment_id,
+            "provider": self.provider,
             "question_id": question_id,
             "prompt_version": prompt_version,
             "model_id": result.model_id,
@@ -85,15 +90,3 @@ class ExperimentRecorder:
 
         with self.output_path.open("a", encoding="utf-8") as file:
             file.write(json.dumps(record, ensure_ascii=False) + "\n")
-
-
-def test_attempted_question_ids_includes_successful_and_failed_attempts(tmp_path):
-    recorder = ExperimentRecorder(tmp_path / "results.jsonl")
-
-    success_result = create_success_result()
-    failure_result = create_failure_result()
-
-    recorder.record("DEV001", "baseline-v1", success_result)
-    recorder.record("DEV002", "baseline-v1", failure_result)
-
-    assert recorder.attempted_question_ids() == {"DEV001", "DEV002"}

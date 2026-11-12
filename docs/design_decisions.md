@@ -180,7 +180,7 @@ Structured responses make it easier to:
 - Identify questions requiring clarification.
 - Validate model output consistently.
 
-Unanswerable questions must not contain SQL. Answerable questions that do not require clarification must contain non-empty SQL.
+Unanswerable questions and questions requiring clarification must not contain SQL. Answerable questions that do not require clarification must contain non-empty SQL.
 
 ## 7. SQL Generation and Execution Separation
 
@@ -236,15 +236,18 @@ If this target is not achieved, the result must be reported honestly rather than
 
 Record benchmark outcomes in append-only JSONL format.
 
-The existing provider experiment files are:
+The provider experiment files are:
 
-- Gemini: `experiments/results/full_schema_baseline.jsonl`
-- Groq: `experiments/results/groq_smoke_test.jsonl`
+- Gemini full-schema baseline: `experiments/results/full_schema_baseline.jsonl`
+- Groq full-schema baseline: `experiments/results/groq_full_schema_baseline.jsonl`
+- Groq integration smoke test: `experiments/results/groq_smoke_test.jsonl`
 
-These files represent separate experiments and must remain independent.
+The Groq smoke test is separate from the Groq full-schema baseline. It must not be counted as a 40-question benchmark result. Provider experiments must remain independent.
 
 Each attempt should preserve:
 
+- Experiment ID.
+- Provider.
 - Question ID.
 - Prompt version.
 - Structured model output, when available.

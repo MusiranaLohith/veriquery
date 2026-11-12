@@ -2,20 +2,42 @@
 import os
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal
 
 from dotenv import load_dotenv
 
 
-# Locate the project root.
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
-# Load environment variables from the project root.
 load_dotenv(PROJECT_ROOT / ".env")
+
+
+Provider = Literal["gemini", "groq"]
+
+
+def get_api_key(provider: Provider) -> str:
+    """Load and validate the API key for the selected provider."""
+
+    environment_variables = {
+        "gemini": "GEMINI_API_KEY",
+        "groq": "GROQ_API_KEY",
+    }
+
+    environment_variable = environment_variables[provider]
+    api_key = os.getenv(environment_variable)
+
+    if not api_key:
+        raise ValueError(
+            f"{environment_variable} is missing. "
+            "Add it to the project-root .env file."
+        )
+
+    return api_key
 
 
 @dataclass(frozen=True)
 class Settings:
-    """Application configuration for Gemini integration."""
+    """Gemini-specific request configuration."""
 
     gemini_api_key: str
     request_timeout: int = 120
@@ -23,14 +45,8 @@ class Settings:
 
 
 def get_settings() -> Settings:
-    """Load and validate application settings."""
+    """Load Gemini settings."""
 
-    api_key = os.getenv("GEMINI_API_KEY")
-
-    if not api_key:
-        raise ValueError(
-            "GEMINI_API_KEY is missing. "
-            "Add it to the project-root .env file."
-        )
-
-    return Settings(gemini_api_key=api_key)
+    return Settings(
+        gemini_api_key=get_api_key("gemini"),
+    )

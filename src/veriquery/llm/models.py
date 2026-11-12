@@ -28,17 +28,22 @@ class SQLGenerationResponse(BaseModel):
 
     @model_validator(mode="after")
     def validate_answerability(self):
-        """Check consistency between answerability and SQL."""
+        """Enforce consistency between answerability, clarification and SQL."""
 
         if not self.is_answerable and self.sql is not None:
             raise ValueError(
                 "Unanswerable questions must not contain SQL."
             )
 
+        if self.needs_clarification and self.sql is not None:
+            raise ValueError(
+                "Responses requiring clarification must not contain SQL."
+            )
+
         if self.is_answerable and not self.needs_clarification:
             if not self.sql or not self.sql.strip():
                 raise ValueError(
-                    "Answerable questions require non-empty SQL."
+                    "Answerable responses without clarification require non-empty SQL."
                 )
 
         return self

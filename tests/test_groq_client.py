@@ -66,12 +66,18 @@ def test_response_schema_has_no_optional_properties():
 
 
 def test_client_rejects_missing_api_key():
-    with patch.dict("os.environ", {}, clear=True):
-        with patch(
-            "veriquery.llm.groq_client.load_dotenv"
+    with patch.dict(
+        "os.environ",
+        {
+            "GROQ_API_KEY": "",
+        },
+        clear=True,
+    ):
+        with pytest.raises(
+            ValueError,
+            match="GROQ_API_KEY is missing",
         ):
-            with pytest.raises(ValueError, match="GROQ_API_KEY"):
-                GroqSQLClient()
+            GroqSQLClient()
 
 
 def test_generate_success():
