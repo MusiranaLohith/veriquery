@@ -53,3 +53,9 @@ reports/benchmark/dev_test_overlap_audit.json
 
 # Private audit script requiring the locked-test dataset
 scripts/benchmark/12_dev_test_overlap_audit.py
+
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
