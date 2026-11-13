@@ -23,6 +23,7 @@ def create_success_result():
         candidate_tokens=50,
         total_tokens=150,
         api_status="success",
+        finish_reason="stop",
     )
 
 
@@ -54,6 +55,7 @@ def test_record_success(tmp_path):
     assert records[0]["api_status"] == "success"
     assert records[0]["output"]["sql"].startswith("SELECT")
     assert records[0]["total_tokens"] == 150
+    assert records[0]["finish_reason"] == "stop"
 
 
 def test_record_failure(tmp_path):

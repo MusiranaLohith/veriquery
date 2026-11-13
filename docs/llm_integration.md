@@ -75,9 +75,12 @@ Prompt construction is implemented in:
 
 `src/veriquery/llm/prompts.py`
 
-The current prompt version is:
+The evaluated prompt versions are:
 
-`full-schema-baseline-v1`
+- `full-schema-baseline-json-object-v2`
+- `full-schema-baseline-json-object-v3`
+
+Both are full-schema/no-retrieval prompts. v2 remains the current comparison baseline; v3 is retained as a completed candidate experiment but was not approved to replace v2.
 
 Each prompt includes:
 
@@ -109,6 +112,7 @@ The Gemini client:
 - Captures latency and available token usage.
 - Classifies failures and returns a common `GenerationResult`.
 
+
 ### Groq
 
 Implementation:
@@ -121,10 +125,15 @@ The Groq client:
 - Validates the returned JSON using the Pydantic response model.
 - Uses a 45-second request timeout.
 - Disables automatic SDK retries.
+- Uses `reasoning_effort="none"` and `reasoning_format="hidden"`.
 - Captures latency and available token usage.
+- Captures selected HTTP rate-limit headers through the raw response interface.
 - Classifies failures and returns the same `GenerationResult` structure.
 
+The captured headers include available values for `retry-after`, request limits, and token limits. Header values are stored as strings.
+
 The Groq client's lack of automatic retries is intentional. Failed attempts remain visible in the experiment records rather than being silently retried by the SDK.
+
 
 ## 7. Common generation result
 
@@ -140,8 +149,10 @@ It captures:
 - Total token count, when available.
 - API status.
 - Error information, when generation fails.
+- Available rate-limit response headers, when provided by the provider.
 
 Token counts are provider-reported values. They should not be assumed to be directly comparable across different providers or tokenization systems.
+
 
 ## 8. Benchmark integration
 
@@ -158,6 +169,8 @@ Select the provider explicitly:
 ```bash
 python -m veriquery.benchmark.run_baseline --provider gemini --dry-run
 python -m veriquery.benchmark.run_baseline --provider groq --dry-run
+```
+
 A dry-run loads and selects development questions without initializing a provider client or sending API requests.
 
 The benchmark runner supports:
@@ -167,7 +180,20 @@ The benchmark runner supports:
 - Retrying failed questions with `--retry-failed`.
 - Separate result files for each provider.
 
+### Request pacing and rate limits
+
+The executor supports configurable request pacing. The Groq CLI currently uses a 12-second minimum interval between requests.
+
+When a Groq response is rate-limited and includes a valid `Retry-After` header, the executor waits for the greater of:
+- The configured request interval.
+- The server-provided retry delay.
+
+Both numeric delay values and HTTP-date values are supported.
+
+This scheduling applies before the next question. It does not automatically retry the failed question. Failed questions remain recorded and can be selected explicitly through `--retry-failed`.
+
 A real benchmark run makes external API requests and requires explicit authorization.
+
 
 ## 9. Experiment result files
 
@@ -179,9 +205,9 @@ A real benchmark run makes external API requests and requires explicit authoriza
 
 The Groq smoke test is not part of the 40-question Groq baseline.
 
-Each benchmark record includes the experiment identifier, provider, question identifier, prompt version, model identifier, timestamp, latency, available token usage, API status, error information, and structured output when available.
+Each benchmark record includes the experiment identifier, provider, question identifier, prompt version, model identifier, timestamp, latency, available token usage, API status, error information, available rate-limit response headers, and structured output when available.
 
-Records are appended as JSON Lines. Existing records are preserved.
+Records are appended as JSON Lines. Existing records are preserved. Older records created before rate-limit header capture may not contain the `rate_limit_headers` field.
 
 ## 10. Reliability and error handling
 
@@ -208,3 +234,22 @@ Provider behavior is tested using mocks. These tests validate response parsing, 
 Passing mocked tests does not establish live provider availability or benchmark accuracy.
 
 Live API experiments must be recorded separately from mocked tests.
+
+
+## 13. Phase 2 experiment outcome
+
+The completed Groq development experiments used `qwen/qwen3.8-27b`:
+
+| Experiment | Unique successful questions | Manual fully correct | Partial | Incorrect |
+|---|---:|---:|---:|---:|
+| v2 | 40/40 | 33 | 1 | 6 |
+| v3 | 40/40 | 32 | 1 | 7 |
+
+v2 remains the current comparison baseline. v3 was not approved to replace it. The v3 result file preserves 56 attempts for 40 unique questions because failed attempts and retries are append-only. The initial 25 successes used a 1024 completion-token cap and 12-second interval; recovered outputs used a 2048 cap and 45-second interval.
+
+These classifications are static manual semantic review, not SQL execution accuracy. Worker 02 did not execute generated SQL. The locked test set was not accessed.
+
+See:
+- `docs/groq_full_schema_baseline_v2_evaluation.md`
+- `docs/groq_full_schema_baseline_v3_evaluation.md`
+- `docs/groq_full_schema_baseline_comparison.md`

@@ -8,11 +8,9 @@ The project focuses on reducing common Text-to-SQL problems, including incorrect
 
 ## Project Status
 
-**Current milestone:** Phase 1 — Project Foundation, Data Engineering and Benchmark Construction.
+**Current milestone:** Phase 2 — LLM Integration and Full-Schema Baseline — completed on 13 November 2026.
 
-The initial dataset investigation, PostgreSQL preparation, business glossary, product inventory and 100-question benchmark have been completed and validated.
-
-Later phases involving retrieval, LLM-based SQL generation, safe execution and production deployment are planned and are not yet implemented.
+Phase 1 established the dataset, PostgreSQL table, business context and 40-question development / 60-question locked-test benchmark. Phase 2 implemented the Groq LLM integration, structured SQL response contract, versioned full-schema/no-retrieval prompts, append-only experiment recording and development benchmark evaluation. The v2 experiment remains the current comparison baseline; v3 was evaluated but not approved to replace it.
 
 ## Technology Stack
 
@@ -117,17 +115,40 @@ veriquery/
 
 Raw and processed dataset files are excluded from Git because of their size. The locked-test materials are also excluded.
 
+## Phase 2 — LLM Integration and Full-Schema Baseline
+
+Completed 13 November 2026.
+
+- Integrated Groq (`qwen/qwen3.8-27b`) as an explicitly selected provider.
+- Implemented structured Pydantic response validation and JSON-object generation.
+- Built versioned full-schema/no-retrieval prompts with verified schema and business rules.
+- Added append-only JSONL experiment records, resume/retry behavior and rate-limit-aware request spacing.
+- Generated and manually reviewed v2 and v3 against the 40-question development benchmark.
+- Preserved all historical attempts; v3 has 40/40 final successful unique outputs.
+
+### Baseline decision
+
+The v2 full-schema/no-retrieval experiment remains the current comparison baseline (33/40 fully correct in manual semantic review). v3 achieved 32/40 and was not approved to replace v2. These are static manual semantic assessments, not SQL execution accuracy. See:
+
+- `docs/groq_full_schema_baseline_v2_evaluation.md`
+- `docs/groq_full_schema_baseline_v3_evaluation.md`
+- `docs/groq_full_schema_baseline_comparison.md`
+
+### Phase 2 limitations
+
+Generated SQL was not executed as part of Worker 02. This phase does not establish PostgreSQL execution accuracy, safe execution, general multi-table JOIN capability, or retrieval improvement. The locked test set was not used.
+
 ## Planned Development
 
-The remaining project roadmap includes:
+The next workstream is retrieval-grounded context construction and evaluation, followed by controlled SQL validation and safe read-only execution:
 
-1. Schema understanding and retrieval.
-2. BM25 and dense retrieval.
-3. Hybrid retrieval.
-4. LLM-based SQL generation.
-5. SQL validation and safe read-only execution.
-6. Baseline and retrieval-strategy evaluation.
-7. Production engineering and deployment.
+1. BM25 and dense retrieval.
+2. Hybrid retrieval and evidence selection.
+3. Retrieval-grounded SQL generation compared with the full-schema baseline.
+4. SQL validation, read-only enforcement and controlled execution (separate execution workstream).
+5. Evaluation and production engineering.
+
+The primary evaluation objective remains to investigate whether hybrid retrieval improves SQL correctness by at least five percentage points over the full-schema/no-retrieval baseline on the locked test set. This is a target, not an achieved result.
 
 The primary evaluation objective is to investigate whether hybrid retrieval improves SQL correctness by at least five percentage points over a full-schema/no-retrieval baseline on the locked test set. This is a pre-registered target, not an achieved result.
 
@@ -149,3 +170,14 @@ VeriQuery prioritizes:
 - Honest reporting of limitations.
 
 The objective is not merely to generate SQL, but to investigate how natural-language analytics can become more trustworthy and verifiable.
+
+## Worker 02 experiment artifacts
+
+- v2 results: `experiments/results/groq_json_object_baseline.jsonl`
+- v3 results: `experiments/results/groq_full_schema_baseline_v3.jsonl`
+- v2 machine-readable evaluation: `experiments/evaluations/groq_json_object_v2_evaluation.json` and `.csv`
+- v2 semantic report: `docs/groq_full_schema_baseline_v2_evaluation.md`
+- v3 semantic report: `docs/groq_full_schema_baseline_v3_evaluation.md`
+- v2/v3 comparison: `docs/groq_full_schema_baseline_comparison.md`
+
+The v3 JSONL is append-only and contains 56 attempts, including failed attempts and successful retries, for 40 unique development questions. Its final state is 40/40 unique questions successfully generated. Generation settings changed during recovery; see the v3 report.

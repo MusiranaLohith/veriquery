@@ -2,8 +2,8 @@
 
 **Project:** VeriQuery — Trustworthy Natural-Language Analytics for Relational Databases
 **Workstream:** Worker 02 — LLM Integration and Full-Schema Baseline
-**Status:** Implementation in progress
-**Last updated:** 12 November 2026
+**Status:** Phase 2 implementation and evaluation complete; v2 retained as comparison baseline  
+**Last updated:** 13 November 2026
 
 ---
 
@@ -116,6 +116,9 @@ The result is preserved separately in:
 `experiments/results/groq_smoke_test.jsonl`
 
 The smoke test demonstrates successful provider communication and structured response generation for one development question. It does not establish full benchmark performance or prove that Groq is superior to Gemini.
+The Groq integration uses the raw HTTP response interface to capture available rate-limit metadata. Captured headers include `retry-after` and available request/token limit, remaining, and reset values.
+
+The response metadata is retained in `GenerationResult` and appended to subsequent experiment records. Missing headers are treated as unavailable metadata rather than generation failures.
 
 ### 4.4 Provider and cost constraints
 
@@ -127,7 +130,7 @@ The smoke test demonstrates successful provider communication and structured res
 - Record the provider and model identifier for every attempt.
 - Keep provider-specific results separate.
 
-The definitive provider for subsequent baseline evaluation must be selected explicitly and documented before the full development benchmark is run.
+Groq (`qwen/qwen3.8-27b`) was used for the completed v2 and v3 development experiments. Gemini's recorded DEV001 503 attempt remains a separate failed provider attempt and is not combined with Groq results. explicitly and documented before the full development benchmark is run.
 
 ## 5. Full-Schema Baseline Decision
 
@@ -246,6 +249,7 @@ The Groq smoke test is separate from the Groq full-schema baseline. It must not 
 
 Each attempt should preserve:
 
+- Available rate-limit response headers, when provided by the provider.
 - Experiment ID.
 - Provider.
 - Question ID.
@@ -281,6 +285,14 @@ Previously successful questions are skipped, while previously attempted question
 The `--retry-failed` command-line option enables the second behavior.
 
 This prevents unnecessary repeated requests while allowing failed attempts to be retried deliberately.
+
+### Rate-limit pacing
+
+The Groq benchmark executor uses a configured 12-second minimum interval between requests.
+
+When a rate-limited response includes a valid `Retry-After` header, the executor waits for the greater of the configured interval and the server-provided delay. Numeric delay values and HTTP-date values are supported.
+
+This pacing controls when the next question is attempted. It does not automatically retry the failed question. Failed attempts remain recorded and can be selected explicitly using `--retry-failed`.
 
 ## 11. Configuration and Secret Management
 
@@ -319,6 +331,9 @@ Provider-specific reliability behavior is maintained separately.
 - Token-usage capture when returned by the API.
 - Latency measurement.
 - Failure recording.
+- Raw HTTP response access for rate-limit metadata capture.
+- Preservation of available rate-limit headers in experiment records.
+- Rate-limit-aware scheduling using `Retry-After` when available.
 
 Transient service errors and rate limits must not be treated as successful SQL-generation outcomes.
 
@@ -391,3 +406,47 @@ A passing unit-test suite or a successful single-question smoke test alone does 
 
 **Document ownership:** VeriQuery — Worker 02
 **Next related documents:** `llm_integration.md` and `baseline_methodology.md`
+
+
+## 16. Phase 2 final experiment decision (13 November 2026)
+
+### 16.1 Evaluated prompts
+
+- v2 prompt: `full-schema-baseline-json-object-v2`
+- v3 prompt: `full-schema-baseline-json-object-v3`
+
+Both are full-schema/no-retrieval conditions. No retrieved documents, embeddings, BM25 results, dense results or few-shot SQL examples were used.
+
+### 16.2 Evaluation outcome
+
+| Manual semantic classification | v2 | v3 |
+|---|---:|---:|
+| Fully correct | 33/40 | 32/40 |
+| Partial | 1/40 | 1/40 |
+| Incorrect | 6/40 | 7/40 |
+| Answerability matches | 39/40 | 39/40 |
+
+No generated SQL was executed for this semantic review. These scores are not execution accuracy.
+
+### 16.3 Baseline decision
+
+Retain v2 as the current full-schema/no-retrieval comparison baseline. Do not lock v3 as its replacement. Preserve the v3 result file as an immutable completed candidate experiment. The v3 generation achieved 40/40 unique successful outputs after retries, but its manual semantic result was lower and it introduced regressions.
+
+### 16.4 v3 run configuration caveat
+
+The v3 JSONL contains 56 append-only attempts for 40 unique questions:
+- Initial 40-question run: 25 successes and 15 failures; `max_completion_tokens=1024`, 12-second interval.
+- Retry of 15 failures: 14 successes and one invalid response; `max_completion_tokens=2048`, 45-second interval.
+- Final targeted DEV036 retry: success with `max_completion_tokens=2048`, 45-second interval.
+
+The final set is complete, but it was not generated under one uniform configuration.
+
+### 16.5 Boundaries
+
+- The locked test set was not inspected or used.
+- Worker 02 did not execute generated SQL.
+- SQL safety and controlled execution remain separate work.
+- Retrieval and the +5 percentage-point hybrid-retrieval target remain future work.
+- No multi-table JOIN capability is claimed.
+
+Supporting evidence is documented in `docs/groq_full_schema_baseline_v2_evaluation.md`, `docs/groq_full_schema_baseline_v3_evaluation.md`, and `docs/groq_full_schema_baseline_comparison.md`.

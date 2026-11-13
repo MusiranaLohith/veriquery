@@ -1,30 +1,54 @@
 import json
 from time import perf_counter
 
-from veriquery.llm.config import get_api_key
-
 from groq import Groq
 from groq import APIStatusError, APITimeoutError
 from pydantic import ValidationError
 
+from veriquery.llm.config import get_api_key
 from veriquery.llm.client import GenerationResult
 from veriquery.llm.models import SQLGenerationResponse
 
 
-
 MODEL_ID = "qwen/qwen3.8-27b"
+
+RATE_LIMIT_HEADER_NAMES = (
+    "retry-after",
+    "x-ratelimit-limit-requests",
+    "x-ratelimit-remaining-requests",
+    "x-ratelimit-reset-requests",
+    "x-ratelimit-limit-tokens",
+    "x-ratelimit-remaining-tokens",
+    "x-ratelimit-reset-tokens",
+)
 
 
 def build_response_schema() -> dict:
-    """Build a strict JSON Schema compatible with Groq."""
+    """Build the response schema for local inspection and testing."""
 
     schema = SQLGenerationResponse.model_json_schema()
 
-    # Strict structured outputs require every property to be required.
     schema["required"] = list(schema["properties"].keys())
     schema["additionalProperties"] = False
 
     return schema
+
+
+def extract_rate_limit_headers(headers) -> dict[str, str]:
+    """Extract available rate-limit headers from an HTTP response."""
+
+    if headers is None:
+        return {}
+
+    extracted = {}
+
+    for name in RATE_LIMIT_HEADER_NAMES:
+        value = headers.get(name)
+
+        if value is not None:
+            extracted[name] = str(value)
+
+    return extracted
 
 
 def classify_groq_error(error: Exception) -> str:
@@ -45,7 +69,10 @@ def classify_groq_error(error: Exception) -> str:
 
         return "api_error"
 
-    if isinstance(error, (ValidationError, ValueError, json.JSONDecodeError)):
+    if isinstance(
+        error,
+        (ValidationError, ValueError, json.JSONDecodeError),
+    ):
         return "invalid_response"
 
     return "client_error"
@@ -53,7 +80,6 @@ def classify_groq_error(error: Exception) -> str:
 
 class GroqSQLClient:
     """Generate structured SQL responses using Groq."""
-
 
     def __init__(
         self,
@@ -79,26 +105,32 @@ class GroqSQLClient:
         """Generate one structured response without automatic retries."""
 
         start_time = perf_counter()
+        rate_limit_headers = {}
 
         try:
-            response = self.client.chat.completions.create(
-                model=MODEL_ID,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": prompt,
-                    }
-                ],
-                max_completion_tokens=1024,
-                response_format={
-                    "type": "json_schema",
-                    "json_schema": {
-                        "name": "sql_generation_response",
-                        "strict": True,
-                        "schema": build_response_schema(),
+            raw_response = (
+                self.client.chat.completions.with_raw_response.create(
+                    model=MODEL_ID,
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": prompt,
+                        }
+                    ],
+                    reasoning_effort="none",
+                    reasoning_format="hidden",
+                    max_completion_tokens=2048,
+                    response_format={
+                        "type": "json_object",
                     },
-                },
+                )
             )
+
+            rate_limit_headers = extract_rate_limit_headers(
+                raw_response.headers
+            )
+
+            response = raw_response.parse()
 
             latency = perf_counter() - start_time
 
@@ -115,11 +147,13 @@ class GroqSQLClient:
             )
 
             usage = response.usage
+            finish_reason = response.choices[0].finish_reason
 
             return GenerationResult(
                 output=parsed_output,
                 model_id=MODEL_ID,
                 latency_seconds=latency,
+                finish_reason=finish_reason,
                 prompt_tokens=(
                     usage.prompt_tokens if usage else None
                 ),
@@ -130,10 +164,18 @@ class GroqSQLClient:
                     usage.total_tokens if usage else None
                 ),
                 api_status="success",
+                rate_limit_headers=rate_limit_headers,
             )
 
         except Exception as error:
             latency = perf_counter() - start_time
+
+            if isinstance(error, APIStatusError):
+                error_response = getattr(error, "response", None)
+
+                rate_limit_headers = extract_rate_limit_headers(
+                    getattr(error_response, "headers", None)
+                )
 
             return GenerationResult(
                 output=None,
@@ -144,4 +186,5 @@ class GroqSQLClient:
                 total_tokens=None,
                 api_status=classify_groq_error(error),
                 error=f"{type(error).__name__}: {error}",
+                rate_limit_headers=rate_limit_headers,
             )

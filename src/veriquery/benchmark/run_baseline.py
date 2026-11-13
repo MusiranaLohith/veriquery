@@ -7,11 +7,9 @@ from veriquery.benchmark.runner import (
     BenchmarkRunConfig,
     prepare_benchmark_run,
 )
-from veriquery.benchmark.executor import (
-    BenchmarkExecutor,
-    BenchmarkRunSummary,
-)
+from veriquery.benchmark.executor import BenchmarkExecutor
 from veriquery.experiments.recorder import ExperimentRecorder
+from veriquery.llm.prompts import PROMPT_VERSION
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
@@ -21,9 +19,21 @@ DEV_QUESTIONS_PATH = (
 )
 
 RESULTS_PATHS = {
-    "gemini": PROJECT_ROOT / "experiments" / "results" / "full_schema_baseline.jsonl",
-    "groq": PROJECT_ROOT / "experiments" / "results" / "groq_full_schema_baseline.jsonl",
+    "gemini": (
+        PROJECT_ROOT
+        / "experiments"
+        / "results"
+        / "gemini_full_schema_baseline_v3.jsonl"
+    ),
+    "groq": (
+        PROJECT_ROOT
+        / "experiments"
+        / "results"
+        / "groq_full_schema_baseline_v3.jsonl"
+    ),
 }
+
+EXPERIMENT_ID = "full-schema-json-object-v3"
 
 
 def parse_args():
@@ -35,7 +45,14 @@ def parse_args():
         "--provider",
         choices=["gemini", "groq"],
         default="gemini",
-        help="LLM provider for this experiment (default: gemini).",
+        help="LLM provider for this experiment.",
+    )
+
+    parser.add_argument(
+        "--results-path",
+        type=Path,
+        default=None,
+        help="Optional explicit path for this experiment's JSONL results.",
     )
 
     parser.add_argument(
@@ -58,15 +75,37 @@ def create_client(provider: str):
 
     if provider == "gemini":
         from veriquery.llm.client import GeminiSQLClient
-
         return GeminiSQLClient()
 
     if provider == "groq":
         from veriquery.llm.groq_client import GroqSQLClient
-
         return GroqSQLClient()
 
     raise ValueError(f"Unsupported provider: {provider}")
+
+
+def validate_existing_experiment(recorder: ExperimentRecorder):
+    """Prevent mixing records from different experiments."""
+
+    for record in recorder.load_records():
+        if record.get("experiment_id") != EXPERIMENT_ID:
+            raise ValueError(
+                "Results file contains records from another experiment. "
+                f"Expected {EXPERIMENT_ID!r}, got "
+                f"{record.get('experiment_id')!r}."
+            )
+
+        if record.get("provider") != recorder.provider:
+            raise ValueError(
+                "Results file contains records from another provider."
+            )
+
+        if record.get("prompt_version") != PROMPT_VERSION:
+            raise ValueError(
+                "Results file contains records from another prompt version. "
+                f"Expected {PROMPT_VERSION!r}, got "
+                f"{record.get('prompt_version')!r}."
+            )
 
 
 def main():
@@ -74,6 +113,8 @@ def main():
 
     print("\n=== VeriQuery Full-Schema Baseline ===\n")
     print(f"Provider: {args.provider}")
+    print(f"Experiment: {EXPERIMENT_ID}")
+    print(f"Prompt version: {PROMPT_VERSION}")
 
     questions = load_dev_questions(
         DEV_QUESTIONS_PATH,
@@ -82,13 +123,19 @@ def main():
 
     print(f"Development questions loaded: {len(questions)}")
 
-    results_path = RESULTS_PATHS[args.provider]
+    results_path = (
+        args.results_path
+        if args.results_path is not None
+        else RESULTS_PATHS[args.provider]
+    )
 
     recorder = ExperimentRecorder(
         output_path=results_path,
         provider=args.provider,
-        experiment_id="full-schema-baseline",
+        experiment_id=EXPERIMENT_ID,
     )
+
+    validate_existing_experiment(recorder)
 
     config = BenchmarkRunConfig(
         retry_failed=args.retry_failed,
@@ -104,10 +151,11 @@ def main():
     print(f"Previously completed: {len(recorder.completed_question_ids())}")
     print(f"Pending questions: {len(pending_questions)}")
 
+    print(f"Results file: {results_path}")
+
     if args.dry_run:
         print("\nDRY RUN COMPLETE")
         print("No API requests were made.")
-        print(f"Experiment results file: {results_path}")
         return
 
     if not pending_questions:
@@ -116,9 +164,12 @@ def main():
 
     client = create_client(args.provider)
 
+    request_interval_seconds = 45 if args.provider == "groq" else 0
+
     executor = BenchmarkExecutor(
         client=client,
         recorder=recorder,
+        request_interval_seconds=request_interval_seconds,
     )
 
     summary = executor.execute(pending_questions)

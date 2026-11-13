@@ -75,7 +75,11 @@ This is deliberately a full-schema, no-retrieval baseline.
 
 ## 6. Prompt and generation contract
 
-The current prompt version is `full-schema-baseline-v1`.
+The prompt versions evaluated in Worker 02 are:
+- v2: `full-schema-baseline-json-object-v2`
+- v3: `full-schema-baseline-json-object-v3`
+
+The v2 experiment remains the current comparison baseline. v3 is a completed candidate experiment but was not approved to replace v2. See the v2 and v3 evaluation reports and comparison report in `docs/`.
 
 The model returns a structured response containing:
 - `is_answerable`
@@ -103,6 +107,7 @@ The Groq integration smoke test is stored separately in `experiments/results/gro
 The smoke test is not a full 40-question baseline and must not be counted as one.
 
 A provider failure must not cause the runner to silently switch providers.
+The initial v2 Groq run used its recorded request pacing. The v3 run initially used a 12-second interval, then retries used a 45-second interval after token-rate-limit diagnostics. When a rate-limited response includes a valid `Retry-After` header, the executor waits for the greater of the configured interval and the server-provided delay. This supports numeric delay values and HTTP-date values. It schedules the next question; it does not automatically retry the failed question.
 
 ## 8. Experiment records
 
@@ -117,9 +122,11 @@ Each generation attempt is recorded in JSONL with:
 - Available prompt, completion, and total token counts.
 - API status.
 - Error details.
+- Available rate-limit response headers, when provided by the provider.
 - Structured output, when valid.
 
 Records are appended. Earlier attempts are preserved.
+Older records created before rate-limit header capture may not contain this metadata.
 
 The runner skips previously attempted questions by default. With `--retry-failed`, previously successful questions remain skipped while failed questions can be attempted again.
 
@@ -162,13 +169,24 @@ If hybrid retrieval does not meet that target, the result must be reported hones
 
 ## 12. Current evidence and limitations
 
-The current evidence must be kept distinct:
+The completed Phase 2 evidence must be kept distinct:
 
 - The Gemini DEV001 attempt returned a provider 503 failure, recorded in `full_schema_baseline.jsonl`.
 - The Groq DEV001 smoke test succeeded and returned a structured response, recorded in `groq_smoke_test.jsonl`.
 - The Groq smoke test is not evidence of full 40-question benchmark performance.
-- A complete 40-question baseline has not been established merely by passing unit tests or dry-runs.
+- v2 has 40 successful unique Groq generations and a static manual evaluation of 33 fully correct, 1 partial and 6 incorrect.
+- v3 has 56 append-only attempt records, representing 40 unique questions; final state is 40 successful unique generations, with 32 fully correct, 1 partial and 7 incorrect in static manual review.
+- v3 used two generation configurations during recovery and is not a uniform same-settings run.
+- v2 remains the current comparison baseline; v3 was not approved to replace it.
 
-Mocked tests do not establish provider availability, SQL correctness, benchmark accuracy, or retrieval improvement.
+Mocked tests do not establish provider availability, SQL correctness, benchmark accuracy, or retrieval improvement. The semantic reports do not claim execution accuracy. The locked test set was not used.
 
-Any completion report must state the actual number of attempted, successful, failed, and remaining development questions for each provider.
+
+## 13. Phase 2 closure record
+
+Worker 02 Phase 2 was completed on 13 November 2026. Provider integration, structured response validation, full-schema prompt versions, experiment recording, 40-question v2/v3 generation, manual semantic review, comparison and baseline decision are documented. The baseline decision is to retain v2 as the current comparison baseline and preserve v3 as a rejected candidate experiment. SQL execution and retrieval remain outside this phase.
+
+Supporting reports:
+- `docs/groq_full_schema_baseline_v2_evaluation.md`
+- `docs/groq_full_schema_baseline_v3_evaluation.md`
+- `docs/groq_full_schema_baseline_comparison.md`

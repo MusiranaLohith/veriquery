@@ -27,6 +27,8 @@ class GenerationResult:
     total_tokens: int | None
     api_status: str
     error: str | None = None
+    rate_limit_headers: dict[str, str] | None = None
+    finish_reason: str | None = None
 
 
 def classify_error(error: Exception) -> str:

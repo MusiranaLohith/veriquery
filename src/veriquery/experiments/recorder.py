@@ -79,8 +79,10 @@ class ExperimentRecorder:
             "prompt_tokens": result.prompt_tokens,
             "candidate_tokens": result.candidate_tokens,
             "total_tokens": result.total_tokens,
+            "finish_reason": result.finish_reason,
             "api_status": result.api_status,
             "error": result.error,
+            "rate_limit_headers": result.rate_limit_headers,
             "output": (
                 result.output.model_dump(mode="json")
                 if result.output is not None
